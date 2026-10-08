@@ -76,6 +76,7 @@
     projects.forEach(view => { view.hidden = view !== project; });
     activeProject = project;
     document.title = project ? `${project.dataset.project} | 한채연 웹 개발자 포트폴리오` : '한채연 | 웹 개발자 포트폴리오';
+    document.dispatchEvent(new CustomEvent('portfolio:route-view', {detail: {projectId: project?.id || null}}));
     if (project) setMainActive('projects');
     else setMainActive(target.id);
     observeSections(project);
