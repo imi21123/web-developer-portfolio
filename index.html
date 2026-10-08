@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="한채연 웹 개발자 포트폴리오. Celevu, YouthPick, ReadyVery, Prolog, Coedu의 구현·문제 해결·협업 경험."><title>한채연 | 웹 개발자 포트폴리오</title><link rel="stylesheet" href="styles.css"><script src="portfolio.js" defer></script><style id="timeline-page-styles">
+.background-page{--accent:var(--blue)}
+.background-page .page-heading{padding-top:20px;margin-bottom:22px}
+.background-page .page-heading h2{font-size:36px;line-height:1.25}
+.background-page .page-heading .subtitle{margin-top:9px}
+.background-page .page-body{display:block}
+.background-timelines{display:grid;grid-template-columns:1fr 1fr;gap:38px}
+.background-timeline{list-style:none;margin:0;padding:0}
+.background-timeline li{position:relative;display:grid;grid-template-columns:105px minmax(0,1fr);gap:25px;min-height:61px;margin:0;padding:0 0 12px}
+.background-timeline li:after{content:"";position:absolute;left:116px;top:10px;bottom:-10px;width:1px;background:var(--rule)}
+.background-timeline li:last-child:after{bottom:10px}
+.background-date{font-size:12px;line-height:1.6;text-align:right;padding-top:3px;color:var(--muted);white-space:nowrap}
+.background-entry{position:relative;z-index:1}
+.background-entry:before{content:"";position:absolute;left:-18px;top:5px;width:9px;height:9px;border-radius:50%;background:var(--accent)}
+.background-name{display:flex;align-items:baseline;flex-wrap:wrap;gap:5px 10px}
+.background-name strong{font-size:18px;line-height:1.35;letter-spacing:-.4px}
+.background-tag{font-size:11px;color:var(--accent);white-space:nowrap}
+.background-entry p{font-size:14px;line-height:1.6;color:var(--muted);margin:4px 0 0;letter-spacing:-.1px}
+@media(max-width:1050px){.background-timelines{gap:24px}.background-timeline li{grid-template-columns:91px minmax(0,1fr);gap:22px;min-height:65px}.background-date{font-size:11px}.background-timeline li:after{left:101px}.background-entry:before{left:-16px}.background-name strong{font-size:16px}.background-entry p{font-size:13px}}
+@media(max-width:720px){.background-page .page-heading h2{font-size:29px}.background-timelines{grid-template-columns:1fr;gap:12px}.background-timeline li{grid-template-columns:96px minmax(0,1fr);gap:24px;min-height:79px;padding-bottom:18px}.background-timeline li:after{left:107px}.background-entry:before{left:-17px}.background-name strong{font-size:17px}.background-entry p{font-size:14px}.background-date{font-size:11px}.background-tag{font-size:10px}.background-timeline.primary li:last-child:after{bottom:-22px}}
+</style><script id="restore-page-after-layout">
+window.addEventListener('load', async () => {
+  await document.fonts.ready;
+  const targetId = location.hash.slice(1);
+  if (!/^page-\d+$/.test(targetId)) return;
+  const pages = [...document.querySelectorAll('.page')];
+  const index = pages.findIndex(page => page.id === targetId);
+  const select = document.getElementById('page-select');
+  if (index < 0 || !select) return;
+  requestAnimationFrame(() => {
+    select.value = String(index);
+    select.dispatchEvent(new Event('change', { bubbles: true }));
+  });
+});
+</script><style id="growth-page-styles">
+.growth-page .page-body{display:block}
+.growth-comparison{display:grid;grid-template-columns:1fr 62px 1fr;gap:22px}
+.growth-column{min-width:0}
+.growth-label{display:block;font-size:12px;letter-spacing:1px;color:var(--muted);margin-bottom:12px}
+.growth-column h3{font-size:22px;line-height:1.4;letter-spacing:-.6px;margin:0 0 13px;padding-bottom:12px;border-bottom:2px solid var(--rule);color:var(--ink)}
+.growth-column.after h3{border-color:var(--accent)}
+.growth-column.after .growth-label{color:var(--accent)}
+.growth-column .bullets li{font-size:17px;line-height:1.5;margin-bottom:7px}
+.growth-code{margin:17px 0 0;padding:16px 19px;background:var(--surface);font-family:Consolas,monospace;font-size:14px;line-height:1.7;white-space:pre-wrap;overflow-wrap:anywhere;word-break:normal}
+.growth-column.after .growth-code{background:var(--ink);color:#eff5fe}
+.growth-arrow{display:flex;align-items:center;justify-content:center;font-size:36px;color:#a4b5c9;padding-bottom:26px}
+.growth-principle{margin-top:21px;padding-top:15px;border-top:1px solid var(--rule)}
+.growth-principle h3{font-size:13px;margin:0 0 7px}
+.growth-principle p{font-size:17px;line-height:1.6;margin:0;color:var(--ink)}
+.growth-principle .diagram-caption{font-size:11px;color:var(--muted);margin-top:6px}
+@media(max-width:1050px){.growth-comparison{grid-template-columns:1fr 36px 1fr;gap:16px}.growth-column h3{font-size:19px}.growth-column .bullets li{font-size:16px}.growth-code{font-size:13px;padding:14px}.growth-principle p{font-size:16px}}
+@media(max-width:720px){.growth-comparison{grid-template-columns:1fr;gap:20px}.growth-arrow{padding:0;transform:rotate(90deg);font-size:30px;height:30px}.growth-column h3{font-size:21px}.growth-column .bullets li{font-size:16px}.growth-code{font-size:13px}.growth-principle{margin-top:26px}.growth-principle p{font-size:16px}}
+</style><style id="project-summary-styles">
+.project-summary-page{--accent:var(--blue)}
+.project-summary-page .page-body{display:block}
+.project-summary{width:100%;border-collapse:collapse;table-layout:fixed;border-top:2px solid var(--accent)}
+.project-summary col:nth-child(1){width:17%}
+.project-summary col:nth-child(2){width:20%}
+.project-summary col:nth-child(3){width:52%}
+.project-summary col:nth-child(4){width:11%}
+.project-summary th{font-size:13px;line-height:1.4;letter-spacing:.4px;color:var(--muted);text-align:left;padding:11px 12px;background:var(--surface);border-bottom:1px solid var(--rule);font-weight:500}
+.project-summary td{padding:10px 12px;border-bottom:1px solid var(--rule);font-size:16px;line-height:1.45;vertical-align:middle;letter-spacing:-.25px}
+.project-summary td:first-child{font-size:19px;font-weight:700}
+.project-summary .project-role{color:var(--muted);font-size:15px}
+.project-summary td:last-child,.project-summary th:last-child{text-align:right;white-space:nowrap}
+.project-summary td:last-child a{color:var(--accent);font-size:14px;text-decoration:none;white-space:nowrap}
+.project-summary td:last-child a:hover{text-decoration:underline}
+.project-summary .work-label{display:block;font-weight:500;font-size:10px;line-height:1.4;letter-spacing:1px;color:var(--accent);margin-top:3px}
+.project-summary-note{margin:17px 0 0;font-size:13px;color:var(--muted);line-height:1.6}
+.project-summary-note a{color:var(--accent);text-decoration:none;margin-right:17px;white-space:nowrap}
+.project-summary-note a:hover{text-decoration:underline}
+@media(max-width:1050px){.project-summary td{font-size:14px;padding:12px 9px}.project-summary td:first-child{font-size:17px}.project-summary .project-role{font-size:13px}.project-summary td:last-child a{font-size:12px}.project-summary th{padding:10px 9px;font-size:12px}}
+@media(max-width:720px){.project-summary{display:block;border-top:2px solid var(--accent);table-layout:auto}.project-summary colgroup{display:none}.project-summary thead{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}.project-summary tbody{display:block}.project-summary tr{display:block;padding:16px 0;border-bottom:1px solid var(--rule)}.project-summary td{display:grid;grid-template-columns:74px minmax(0,1fr);gap:10px;padding:5px 0;border:0;font-size:15px;line-height:1.6}.project-summary td:before{content:attr(data-label);font-size:11px;color:var(--muted);line-height:2.2;letter-spacing:0}.project-summary td:first-child{display:block;font-size:20px;padding:0 0 10px}.project-summary td:first-child:before{display:none}.project-summary .work-label{display:inline;font-size:10px;margin-left:10px}.project-summary .project-role{font-size:15px}.project-summary td:last-child{text-align:left}.project-summary td:last-child a{font-size:14px}.project-summary-note{font-size:12px}.project-summary-note a{display:inline-block;margin-bottom:6px}}
+</style></head>
+<body><a class="skip-link" href="#portfolio">본문으로 이동</a><nav class="viewer" aria-label="포트폴리오 페이지 탐색"><a class="viewer-brand" href="#page-1">한채연 <span>WEB DEVELOPER</span></a><div class="viewer-controls"><button id="prev" type="button" aria-label="이전 페이지">←</button><label class="sr-only" for="page-select">페이지 선택</label><select id="page-select"></select><button id="next" type="button" aria-label="다음 페이지">→</button><button id="mode" type="button" aria-pressed="false">한 장씩 보기</button></div></nav><main id="portfolio"><section class="page cover accent-blue" id="page-1" data-title="화면의 흐름을 이해하고, 서버까지 연결하는 개발자" aria-labelledby="title-1">
+    <header class="page-header"><span class="eyebrow">WEB DEVELOPER</span><span class="owner">한채연 · PORTFOLIO</span></header>
+    <div class="page-heading"><h2 id="title-1">화면의 흐름을 이해하고,<br> 서버까지 연결하는 개발자</h2><p class="subtitle">한채연 · WEB DEVELOPER</p></div>
+    <div class="page-body"><div class="body-left"><p class="cover-statement">사용자가 겪는 문제를 출발점으로<br>구현·검증·협업까지 이어가는 웹 개발자</p><div class="cover-contact"><a href="mailto:imi21123@naver.com">imi21123@naver.com</a><a href="https://github.com/imi21123" target="_blank" rel="noopener noreferrer">github.com/imi21123 ↗</a></div></div><div class="body-right"><div class="cover-art"><div class="art-label" style="font-size:16px;letter-spacing:0">자격증</div><div class="art-line">정보처리기사<span>2026.09.11 취득</span></div><div class="art-line">SQLD<span>SQL 개발자 · 2026.06.19 취득</span></div><div class="art-line">ADsP<span>데이터분석 준전문가 · 2026.06.05 취득</span></div></div></div></div>
+    <footer class="page-footer"><span class="evidence">한채연 · WEB DEVELOPER</span><span class="page-number">01 <i>/</i> 24</span></footer>
+    </section><section class="page case accent-blue" id="page-2" data-title="프론트엔드를 중심으로, 제품의 전체 흐름을 맡았습니다" aria-labelledby="title-2">
+    <header class="page-header"><span class="eyebrow">PROFILE</span><span class="owner">한채연 · PORTFOLIO</span></header>
+    <div class="page-heading"><h2 id="title-2">프론트엔드를 중심으로,<br> 제품의 전체 흐름을 맡았습니다</h2><p class="subtitle">알리고에이아이 개발팀 · 웹 개발자 · 2025.10–2026.04</p></div>
+    <div class="page-body"><div class="body-left"><div class="text-block"><h3>실무 경험</h3><ul class="bullets"><li><strong>풀스택 3인 팀</strong>에서 Celevu V2 리뉴얼 참여</li><li>프론트엔드 중심 개발 · 관련 서버·관리자 기능 구현</li><li>캠페인·셀럽 탐색·협업 제안·추천 이력 연결</li></ul></div><div class="text-block"><h3>일하는 방식</h3><ul class="bullets"><li>요구사항과 API 계약을 먼저 확인하고 화면 상태 설계</li><li>증상 재현 → 원인 확인 → 공통 계층 수정</li><li>리뷰·문서로 팀의 구현 기준 공유</li></ul></div></div><div class="body-right"><div class="profile-note"><span class="big-word">WEB<br>DEVELOPER</span><div class="rule"></div><p>가톨릭대학교<br>물리학 전공 · 컴퓨터정보공학 복수전공</p><p>화면 구현 → 도메인 담당<br>프론트·서버·운영까지 역할 확장</p></div></div></div>
+    <footer class="page-footer"><span class="evidence">한채연 · WEB DEVELOPER</span><span class="page-number">02 <i>/</i> 24</span></footer>
+    </section><section class="page case accent-blue project-summary-page" id="page-3" data-title="대표 프로젝트 한눈에 보기" aria-labelledby="title-3">
+<header class="page-header"><span class="eyebrow">PROJECTS / AT A GLANCE</span><span class="owner">한채연 · PORTFOLIO</span></header>
+<div class="page-heading"><h2 id="title-3">대표 프로젝트 한눈에 보기</h2><p class="subtitle">담당 역할과 핵심 기여 · 상세 페이지로 연결</p></div>
+<div class="page-body"><table class="project-summary" aria-label="대표 프로젝트별 담당 역할과 핵심 기여"><colgroup><col><col><col><col></colgroup><thead><tr><th scope="col">프로젝트</th><th scope="col">담당 역할</th><th scope="col">핵심 기여</th><th scope="col">상세 페이지</th></tr></thead><tbody><tr><td data-label="프로젝트">Celevu<span class="work-label">WORK EXPERIENCE</span></td><td data-label="담당 역할" class="project-role">프론트 중심 · 풀스택</td><td data-label="핵심 기여">HTTP·인증 기반 · 주요 화면 · 서버·관리자 연결</td><td data-label="상세 페이지"><a href="#page-4" aria-label="Celevu 상세 페이지로 이동">04–10 ↗</a></td></tr><tr><td data-label="프로젝트">YouthPick</td><td data-label="담당 역할" class="project-role">풀스택</td><td data-label="핵심 기여">정책 비교·추천 API 구현 · 매칭 규칙 설계 · FSD 구조 정리</td><td data-label="상세 페이지"><a href="#page-11" aria-label="YouthPick 상세 페이지로 이동">11–14 ↗</a></td></tr><tr><td data-label="프로젝트">ReadyVery</td><td data-label="담당 역할" class="project-role">프론트엔드</td><td data-label="핵심 기여">주문·쿠폰·결제 흐름 · 축제 주문 환경으로 확장</td><td data-label="상세 페이지"><a href="#page-15" aria-label="ReadyVery 상세 페이지로 이동">15–17 ↗</a></td></tr><tr><td data-label="프로젝트">Prolog</td><td data-label="담당 역할" class="project-role">풀스택</td><td data-label="핵심 기여">게시글·댓글·북마크 구현 · 유스케이스 권한 검증</td><td data-label="상세 페이지"><a href="#page-18" aria-label="Prolog 상세 페이지로 이동">18–20 ↗</a></td></tr><tr><td data-label="프로젝트">Coedu</td><td data-label="담당 역할" class="project-role">프론트엔드</td><td data-label="핵심 기여">개발 환경·CI · 인증·테마 · 화면 이동 오류 해결</td><td data-label="상세 페이지"><a href="#page-21" aria-label="Coedu 상세 페이지로 이동">21–22 ↗</a></td></tr></tbody></table><p class="project-summary-note"><a href="#page-20">성장 사례 · 20</a><a href="#page-23">협업 경험 · 23</a><a href="#page-24">이력·활동 · 24</a></p></div>
+<footer class="page-footer"><span class="evidence">한채연 · WEB DEVELOPER</span><span class="page-number">03 <i>/</i> 24</span></footer></section><section class="page project-page project-cover theme-celevu" id="page-4" data-title="Celevu · 프로젝트 개요" aria-labelledby="title-4">
+<header class="page-header"><span class="chapter-label">PROJECT 01<span>실무 · V2 리뉴얼</span></span><span class="owner">한채연 · PORTFOLIO</span></header>
+<div class="page-body cover-body">
+  <div class="cover-identity"><div class="page-heading"><h2 id="title-4">Celevu</h2><p class="cover-description">셀럽 이미지 라이선싱 기반<br>광고 제작·섭외 플랫폼</p></div>
+    <dl class="cover-meta"><div><dt>기간</dt><dd>2025.10–2026.04</dd></div><div><dt>담당 역할</dt><dd>풀스택 개발 · 프론트엔드 중심</dd></div><div><dt>기술</dt><dd>Next.js · TypeScript · NestJS · Django</dd></div></dl>
+    <a class="chapter-continue" href="#page-5">구현·문제 해결 사례 · 05–10 <span aria-hidden="true">→</span></a>
+  </div>
+  <div class="cover-summary"><h3>주요 기여</h3><ul class="cover-work"><li>셀럽 상세·캠페인·협업 제안 화면과 API 연동</li><li>공통 HTTP·인증 기반 구축과 기능별 계층 분리</li><li>통화 변환·추천 이력·다국어 운영 기능 구현</li></ul><div class="cover-result"><h3>핵심 결과</h3><p>화면부터 서버·관리자까지 연결하고, <br>반복되는 통신·인증 처리를 공통 계층으로 정리</p></div></div>
+</div>
+<dl class="cover-statistics" aria-label="Celevu의 구현 범위와 주요 수치"><div class="cover-stat"><dt>개발 참여 기간</dt><dd>6<span>개월</span></dd><dd class="cover-stat-detail">2025.10–2026.04</dd></div><div class="cover-stat"><dt>개발 범위</dt><dd>3<span>개 시스템</span></dd><dd class="cover-stat-detail">프론트엔드 · 서버 · 관리자</dd></div><div class="cover-stat"><dt>서비스 리뉴얼</dt><dd>V2</dd><dd class="cover-stat-detail">셀럽 탐색 → 캠페인 → 협업 제안</dd></div></dl><p class="cover-stat-note">개인 개발 범위와 실무 참여 기간</p>
+<footer class="page-footer"><span class="evidence">한채연 · WEB DEVELOPER</span><span class="page-number">04 <i>/</i> 24</span></footer>
+</section><section class="page case accent-blue project-page theme-celevu" id="page-5" data-title="Celevu · 화면에 섞인 데이터 처리를 기능별 역할로 분리했습니다" aria-labelledby="title-5">
+    <header class="page-header"><span class="project-context"><span class="project-name">Celevu</span><span class="eyebrow">ARCHITECTURE</span></span><span class="owner">한채연 · PORTFOLIO</span></header>
+    <div class="page-heading"><h2 id="title-5">화면에 섞인 데이터 처리를<br> 기능별 역할로 분리했습니다</h2><p class="subtitle">유지보수할 때 확인할 코드의 경계를 명확하게 정리</p></div>
+    <div class="page-body"><div class="body-left"><div class="text-block"><h3>문제와 판단</h3><ul class="bullets"><li>비즈니스 처리와 API 접근이 섞이면 변경 영향을 찾기 어려움</li><li>도메인별 역할과 공통 통신 기반을 구분할 필요</li></ul></div><div class="text-block"><h3>담당 작업</h3><ul class="bullets"><li>셀럽·인증·캠페인·추천의 기능별 구조 정리</li><li>Repository·Application·Query·Mapper의 역할 분리</li><li>API 응답을 화면 모델로 바꾸는 매퍼 분리</li><li>공통 HTTP 코드를 infra 영역으로 정리</li></ul></div><div class="text-block"><h3>변화</h3><ul class="bullets"><li>화면 표시·도메인 처리·통신의 변경 위치를 구분</li></ul></div></div><div class="body-right"><div class="language-diagram"><div><span>UI · QUERY</span><strong>화면과 조회 상태</strong><p>사용자에게 표시할 상태 구성</p></div><div><span>APPLICATION · REPOSITORY</span><strong>처리 규칙과 데이터 접근</strong><p>도메인별 기능의 책임 구분</p></div><div><span>MAPPER · INFRA</span><strong>응답 변환과 공통 통신</strong><p>화면 모델 변환 · HTTP 기반 재사용</p></div></div></div></div>
+    <footer class="page-footer"><span class="evidence">한채연 · WEB DEVELOPER</span><span class="page-number">05 <i>/</i> 24</span></footer>
+    </section><section class="page case accent-blue project-page theme-celevu" id="page-6" data-title="Celevu · 토큰 만료 처리를 클라이언트와 서버 실행 환경에 맞췄습니다" aria-labelledby="title-6">
+    <header class="page-header"><span class="project-context"><span class="project-name">Celevu</span><span class="eyebrow">AUTHENTICATION</span></span><span class="owner">한채연 · PORTFOLIO</span></header>
+    <div class="page-heading"><h2 id="title-6">토큰 만료 처리를<br> 클라이언트와 서버 실행 환경에 맞췄습니다</h2><p class="subtitle">공통 HTTP 계층 · 자동 갱신 · 요청 재시도</p></div>
+    <div class="page-body"><div class="body-left"><div class="text-block"><h3>판단</h3><ul class="bullets"><li>Next.js의 브라우저·서버 요청은 토큰 접근 방식이 다름</li><li>컴포넌트마다 인증 오류를 처리하면 정책이 분산</li></ul></div><div class="text-block"><h3>구현</h3><ul class="bullets"><li>fetch 기반 HTTP 클라이언트와 토큰 주입 래퍼 구성</li><li>HttpOnly 쿠키 기반 인증 처리와 서버 액션 연결</li><li>401 응답 시 토큰 갱신 후 원 요청을 한 번 재시도</li></ul></div><div class="text-block"><h3>변화</h3><ul class="bullets"><li>화면에서 반복하던 통신·인증 처리를 공통 계층으로 이동</li></ul></div></div><div class="body-right"><div class="flow "><div class="flow-step"><span class="step-no">01</span><div><strong>클라이언트 / 서버 요청</strong><small>실행 환경에 맞는 인증 래퍼 사용</small></div></div><div class="flow-step"><span class="step-no">02</span><div><strong>401 → 토큰 갱신</strong><small>갱신 실패는 인증 실패로 전달</small></div></div><div class="flow-step"><span class="step-no">03</span><div><strong>원 요청 재시도</strong><small>재시도를 한 번으로 제한</small></div></div><p class="diagram-caption">인증 규칙을 화면 밖에서 일관되게 적용</p></div></div></div>
+    <footer class="page-footer"><span class="evidence">한채연 · WEB DEVELOPER</span><span class="page-number">06 <i>/</i> 24</span></footer>
+    </section><section class="page case accent-blue project-page theme-celevu" id="page-7" data-title="Celevu · 파일 업로드 실패를 multipart 헤더 처리에서 해결했습니다" aria-labelledby="title-7">
+    <header class="page-header"><span class="project-context"><span class="project-name">Celevu</span><span class="eyebrow">BUG FIX</span></span><span class="owner">한채연 · PORTFOLIO</span></header>
+    <div class="page-heading"><h2 id="title-7">파일 업로드 실패를<br> multipart 헤더 처리에서 해결했습니다</h2><p class="subtitle">화면 증상을 요청 형식까지 추적한 사례</p></div>
+    <div class="page-body"><div class="body-left"><div class="text-block"><h3>문제와 원인</h3><ul class="bullets"><li>참고 자료 업로드 시 서버가 요청 본문을 해석하지 못함</li><li>공통 HTTP 계층이 FormData에도 Content-Type을 지정</li><li>브라우저가 생성해야 할 multipart boundary 누락</li></ul></div><div class="text-block"><h3>수정</h3><ul class="bullets"><li>FormData 여부를 확인해 Content-Type 헤더 제거</li><li>일반 JSON 요청과 파일 요청의 처리 경로 구분</li></ul></div><div class="text-block"><h3>개선 포인트</h3><ul class="bullets"><li>업로드 화면 대신 공통 전송 계층의 원인 수정</li></ul></div></div><div class="body-right"><div class="code-diagram"><div class="code-label">REQUEST FORMAT</div><pre><code>if (body instanceof FormData) {
+  headers.delete(&quot;Content-Type&quot;);
+}
+
+// 브라우저가 boundary를 포함한
+// multipart 헤더를 자동 생성</code></pre><p class="diagram-caption">실제 변경 내용을 설명하기 위한 축약 코드</p></div></div></div>
+    <footer class="page-footer"><span class="evidence">한채연 · WEB DEVELOPER</span><span class="page-number">07 <i>/</i> 24</span></footer>
+    </section><section class="page case accent-blue project-page theme-celevu" id="page-8" data-title="Celevu · 통화 변환을 서버 API부터 예산 화면까지 연결했습니다" aria-labelledby="title-8">
+    <header class="page-header"><span class="project-context"><span class="project-name">Celevu</span><span class="eyebrow">FULL STACK FEATURE</span></span><span class="owner">한채연 · PORTFOLIO</span></header>
+    <div class="page-heading"><h2 id="title-8">통화 변환을<br> 서버 API부터 예산 화면까지 연결했습니다</h2><p class="subtitle">하나의 기능을 사용자 선택 → 계산 → 표시까지 완성</p></div>
+    <div class="page-body"><div class="body-left"><div class="text-block"><h3>요구사항</h3><ul class="bullets"><li>해외 사용자가 선택한 통화로 캠페인 예산 확인</li><li>화면 이동·새로고침 뒤에도 선택한 통화 유지</li></ul></div><div class="text-block"><h3>담당 구현</h3><ul class="bullets"><li>서버 환율 조회·통화 변환 모듈 및 JWT 인증 적용</li><li>선택 통화 스토어 영속화와 변환 훅 구현</li><li>캠페인 생성·상세·협업 제안 화면에 적용</li></ul></div><div class="text-block"><h3>설계 관점</h3><ul class="bullets"><li>서버의 계산 규칙과 화면의 표시 상태를 구분</li></ul></div></div><div class="body-right"><div class="flow dark"><div class="flow-step"><span class="step-no">01</span><div><strong>사용자 선택</strong><small>통화 선택 상태 저장</small></div></div><div class="flow-step"><span class="step-no">02</span><div><strong>인증된 서버 API</strong><small>환율 조회 · 통화 변환</small></div></div><div class="flow-step"><span class="step-no">03</span><div><strong>공통 표시 로직</strong><small>여러 예산 화면에 동일하게 적용</small></div></div><p class="diagram-caption">프론트엔드와 서버 사이의 계약을 직접 연결</p></div></div></div>
+    <footer class="page-footer"><span class="evidence">한채연 · WEB DEVELOPER</span><span class="page-number">08 <i>/</i> 24</span></footer>
+    </section><section class="page case accent-blue project-page theme-celevu" id="page-9" data-title="Celevu · 지난 추천 조건과 결과를 다시 활용할 수 있게 만들었습니다" aria-labelledby="title-9">
+    <header class="page-header"><span class="project-context"><span class="project-name">Celevu</span><span class="eyebrow">RECOMMENDATION HISTORY</span></span><span class="owner">한채연 · PORTFOLIO</span></header>
+    <div class="page-heading"><h2 id="title-9">지난 추천 조건과 결과를<br> 다시 활용할 수 있게 만들었습니다</h2><p class="subtitle">추천 이력 저장·조회 API와 화면 경험 연결</p></div>
+    <div class="page-body"><div class="body-left"><div class="text-block"><h3>사용자 흐름</h3><ul class="bullets"><li>과거의 추천 결과를 찾고 같은 조건으로 다시 실행</li></ul></div><div class="text-block"><h3>담당 구현</h3><ul class="bullets"><li>서버에 추천 이력 저장·목록·상세 조회 구현</li><li>커서 기반 페이지네이션과 무한 스크롤 연결</li><li>이력 상세에서 이전 프롬프트 재로딩</li><li>선택한 셀럽의 추천 사유를 캠페인 메모에 반영</li></ul></div><div class="text-block"><h3>결과</h3><ul class="bullets"><li>추천 조회가 일회성 화면에서 재사용 가능한 흐름으로 확장</li></ul></div></div><div class="body-right"><div class="flow "><div class="flow-step"><span class="step-no">01</span><div><strong>이력 목록</strong><small>커서 기반 추가 조회</small></div></div><div class="flow-step"><span class="step-no">02</span><div><strong>이력 상세</strong><small>추천 결과 · 당시 입력 조건 확인</small></div></div><div class="flow-step"><span class="step-no">03</span><div><strong>조건 재사용</strong><small>프롬프트 재로딩 → 다시 추천</small></div></div><p class="diagram-caption">담당 범위: 추천 이력 API · 결과 화면 · 조건 재사용</p></div></div></div>
+    <footer class="page-footer"><span class="evidence">한채연 · WEB DEVELOPER</span><span class="page-number">09 <i>/</i> 24</span></footer>
+    </section><section class="page case accent-blue project-page theme-celevu" id="page-10" data-title="Celevu · 다국어 표시와 운영 입력을 세 저장소에서 함께 연결했습니다" aria-labelledby="title-10">
+    <header class="page-header"><span class="project-context"><span class="project-name">Celevu</span><span class="eyebrow">MULTILINGUAL OPERATIONS</span></span><span class="owner">한채연 · PORTFOLIO</span></header>
+    <div class="page-heading"><h2 id="title-10">다국어 표시와 운영 입력을<br> 세 저장소에서 함께 연결했습니다</h2><p class="subtitle">프론트엔드 · 서버 · Django 관리자</p></div>
+    <div class="page-body"><div class="body-left"><div class="text-block"><h3>맥락</h3><ul class="bullets"><li>화면 번역과 데이터 번역이 함께 필요한 해외 대응</li><li>운영자가 여러 언어의 정보를 관리할 입력 흐름 필요</li></ul></div><div class="text-block"><h3>담당 구현</h3><ul class="bullets"><li>프론트엔드 한국어·영어 번역 구조와 화면 적용</li><li>요청 언어에 맞는 셀럽명 등 서버 응답 처리</li><li>Django Locale 모델과 관리자 다국어 입력 탭 추가</li><li>반복되는 콘텐츠 번역 저장 로직을 공통화</li></ul></div><div class="text-block"><h3>관점</h3><ul class="bullets"><li>사용자 화면뿐 아니라 운영자의 관리 과정까지 고려</li></ul></div></div><div class="body-right"><div class="language-diagram"><div><span>ADMIN</span><strong>언어별 정보 입력</strong><p>운영자가 탭으로 번역 데이터 관리</p></div><div><span>SERVER</span><strong>요청 언어로 응답</strong><p>표시할 언어와 데이터 선택</p></div><div><span>FRONTEND</span><strong>문구 + 콘텐츠 표시</strong><p>화면 번역과 도메인 데이터 연결</p></div></div></div></div>
+    <footer class="page-footer"><span class="evidence">한채연 · WEB DEVELOPER</span><span class="page-number">10 <i>/</i> 24</span></footer>
+    </section><section class="page project-page project-cover theme-youthpick" id="page-11" data-title="YouthPick · 프로젝트 개요" aria-labelledby="title-11">
+<header class="page-header"><span class="chapter-label">PROJECT 02<span>팀 프로젝트 · 풀스택</span></span><span class="owner">한채연 · PORTFOLIO</span></header>
+<div class="page-body cover-body">
+  <div class="cover-identity"><div class="page-heading"><h2 id="title-11">YouthPick</h2><p class="cover-description">사용자 조건에 맞는 청년 정책<br>추천·비교 서비스</p></div>
+    <dl class="cover-meta"><div><dt>기간</dt><dd>2026.07</dd></div><div><dt>담당 역할</dt><dd>풀스택 개발</dd></div><div><dt>기술</dt><dd>React · Zustand · Java 21 · Spring Boot</dd></div></dl>
+    <a class="chapter-continue" href="#page-12">설계·문제 해결 사례 · 12–14 <span aria-hidden="true">→</span></a>
+  </div>
+  <div class="cover-summary"><h3>주요 기여</h3><ul class="cover-work"><li>정책 비교 API 구현과 비교 화면 연동</li><li>자격 조건·평가 항목을 분리한 추천 매칭 설계</li><li>FSD 구조 정리·PR 리뷰·비교 대상 누락 수정</li></ul><div class="cover-result"><h3>핵심 결과</h3><p>자격 여부와 추천 근거를 화면에 연결하고, <br>선택한 정책을 비교할 수 있는 흐름 구현</p></div></div>
+</div>
+<dl class="cover-statistics" aria-label="YouthPick의 구현 범위와 주요 수치"><div class="cover-stat"><dt>추천 자격 조건</dt><dd>8<span>개</span></dd><dd class="cover-stat-detail">연령 · 지역 · 직업 등</dd></div><div class="cover-stat"><dt>추천 평가 항목</dt><dd>10<span>개</span></dd><dd class="cover-stat-detail">가중치를 적용한 적합도 점수</dd></div><div class="cover-stat"><dt>한 번에 비교할 정책</dt><dd>2–3<span>개</span></dd><dd class="cover-stat-detail">요청 순서 유지 · 중복·누락 검증</dd></div></dl><p class="cover-stat-note">직접 구현한 정책 추천·비교 규칙</p>
+<footer class="page-footer"><span class="evidence">한채연 · WEB DEVELOPER</span><span class="page-number">11 <i>/</i> 24</span></footer>
+</section><section class="page case accent-blue project-page theme-youthpick" id="page-12" data-title="YouthPick · 신청 자격과 추천 적합도를 서로 다른 규칙으로 설계했습니다" aria-labelledby="title-12">
+    <header class="page-header"><span class="project-context"><span class="project-name">YouthPick</span><span class="eyebrow">MATCHING DESIGN</span></span><span class="owner">한채연 · PORTFOLIO</span></header>
+    <div class="page-heading"><h2 id="title-12">신청 자격과 추천 적합도를<br> 서로 다른 규칙으로 설계했습니다</h2><p class="subtitle">조건에 맞는 정책 선별 → 상대적인 추천 순서 결정</p></div>
+    <div class="page-body"><div class="body-left"><div class="text-block"><h3>판단</h3><ul class="bullets"><li>신청 불가능한 정책과 덜 적합한 정책을 구분해야 함</li><li>사용자 입력값과 정책 데이터의 코드 체계가 다름</li></ul></div><div class="text-block"><h3>구현</h3><ul class="bullets"><li>자격 조건 8개: 연령·지역·직업·학력·혼인·전공·특수조건·소득</li><li>평가 항목 10개로 점수 계산 · 가중치 합계 100</li><li>입력값을 정책 코드로 매핑하고 허용 값 검증</li><li>matchedAxes를 반환해 화면에서 추천 근거 표시</li></ul></div><div class="text-block"><h3>개선</h3><ul class="bullets"><li>클라이언트 임시 점수를 서버 매칭 결과로 교체</li></ul></div></div><div class="body-right"><div class="matching-diagram"><div class="match-stage"><span>01 · ELIGIBILITY</span><strong>자격 조건 · 8개</strong><p>필수 조건을 충족하는 후보 선별</p></div><div class="match-stage emphasis"><span>02 · RELEVANCE</span><strong>평가 항목 · 10개</strong><p>적합도를 계산해 추천 순서 결정</p></div><div class="match-result"><b>추천 결과 + 매칭 근거</b><p>선택 이유를 사용자에게 설명</p></div></div></div></div>
+    <footer class="page-footer"><span class="evidence">한채연 · WEB DEVELOPER</span><span class="page-number">12 <i>/</i> 24</span></footer>
+    </section><section class="page case accent-blue project-page theme-youthpick" id="page-13" data-title="YouthPick · 선택한 정책이 목록 밖에 있어도 비교할 수 있도록 조회 방식을 바꿨습니다" aria-labelledby="title-13">
+    <header class="page-header"><span class="project-context"><span class="project-name">YouthPick</span><span class="eyebrow">DATA BOUNDARY BUG</span></span><span class="owner">한채연 · PORTFOLIO</span></header>
+    <div class="page-heading"><h2 id="title-13">선택한 정책이 목록 밖에 있어도<br> 비교할 수 있도록 조회 방식을 바꿨습니다</h2><p class="subtitle">현재 화면의 데이터 범위와 사용자의 선택 범위를 구분</p></div>
+    <div class="page-body"><div class="body-left"><div class="text-block"><h3>문제</h3><ul class="bullets"><li>비교 대상 정책을 최신 100개 목록에서만 탐색</li><li>선택한 ID가 목록에 없으면 비교 데이터 누락</li></ul></div><div class="text-block"><h3>수정</h3><ul class="bullets"><li>선택한 정책 ID로 상세 데이터를 별도 조회</li><li>useQueries로 여러 대상 조회를 연결</li><li>서버 비교 API에서 2–3개 대상·중복·존재 여부 검증</li></ul></div><div class="text-block"><h3>결과</h3><ul class="bullets"><li>목록에 노출되는 범위와 비교 가능한 범위를 분리</li></ul></div></div><div class="body-right"><div class="before-after"><div><span>BEFORE</span><strong>최신 목록 안에서 찾기</strong><p>선택 ID → 최신 100개 목록 검색<br>목록 밖이면 상세 정보 누락</p></div><div class="after"><span>AFTER</span><strong>선택 ID로 직접 조회</strong><p>선택 ID → 상세 API 조회<br>현재 목록과 관계없이 비교 구성</p></div></div></div></div>
+    <footer class="page-footer"><span class="evidence">한채연 · WEB DEVELOPER</span><span class="page-number">13 <i>/</i> 24</span></footer>
+    </section><section class="page case accent-blue project-page theme-youthpick" id="page-14" data-title="YouthPick · 큰 화면 파일을 나누고, 리뷰 기준으로 구조를 유지했습니다" aria-labelledby="title-14">
+    <header class="page-header"><span class="project-context"><span class="project-name">YouthPick</span><span class="eyebrow">STRUCTURE &amp; REVIEW</span></span><span class="owner">한채연 · PORTFOLIO</span></header>
+    <div class="page-heading"><h2 id="title-14">큰 화면 파일을 나누고,<br> 리뷰 기준으로 구조를 유지했습니다</h2><p class="subtitle">AI 생성 초안의 활용과 팀 개발 기준 정리</p></div>
+    <div class="page-body"><div class="body-left"><div class="text-block"><h3>출발점</h3><ul class="bullets"><li>Lovable 기반 UI 초안의 App.tsx에 2,094줄 집중</li><li>화면·상태·API 코드가 섞여 수정 경계가 불분명</li></ul></div><div class="text-block"><h3>실행</h3><ul class="bullets"><li>Claude Code를 활용해 FSD 기준으로 코드 분리</li><li>pages·widgets·features·entities·shared 역할 정리</li><li>프론트엔드 PR 리뷰에 도구를 활용해 경계·중복 확인</li></ul></div><div class="text-block"><h3>협업</h3><ul class="bullets"><li>Git 사용 지원과 리뷰로 팀원이 구조에 맞춰 개발하도록 안내</li></ul></div></div><div class="body-right"><div class="layers"><div><span>pages</span><p>페이지 조합</p></div><div><span>widgets</span><p>독립된 화면 영역</p></div><div><span>features</span><p>사용자 행동</p></div><div><span>entities</span><p>도메인 모델</p></div><div><span>shared</span><p>공통 기반</p></div></div><p class="diagram-caption">도구의 초안·제안에 프로젝트 기준을 적용하며 리뷰</p></div></div>
+    <footer class="page-footer"><span class="evidence">한채연 · WEB DEVELOPER</span><span class="page-number">14 <i>/</i> 24</span></footer>
+    </section><section class="page project-page project-cover theme-readyvery" id="page-15" data-title="ReadyVery · 프로젝트 개요" aria-labelledby="title-15">
+<header class="page-header"><span class="chapter-label">PROJECT 03<span>창업팀 · 실제 서비스 운영</span></span><span class="owner">한채연 · PORTFOLIO</span></header>
+<div class="page-body cover-body">
+  <div class="cover-identity"><div class="page-heading"><h2 id="title-15">ReadyVery</h2><p class="cover-description">카페에서 교내 축제까지 확장한<br>모바일 주문·결제 서비스</p></div>
+    <dl class="cover-meta"><div><dt>기간</dt><dd>2023.10–2024.06</dd></div><div><dt>담당 역할</dt><dd>프론트엔드 개발</dd></div><div><dt>기술</dt><dd>React · Recoil · axios · Toss Payments</dd></div></dl>
+    <a class="chapter-continue" href="#page-16">결제·운영 사례 · 16–17 <span aria-hidden="true">→</span></a>
+  </div>
+  <div class="cover-summary"><h3>주요 기여</h3><ul class="cover-work"><li>가게·상품 옵션·장바구니·쿠폰·주문 상태 구현</li><li>Toss Payments 연동과 할인 결제 금액 정합성 수정</li><li>axios 훅 분리·피드백 기반 UI 개편·축제 흐름 확장</li></ul><div class="cover-result"><h3>핵심 결과</h3><p>카페 주문 서비스를 축제 환경으로 확장해 <br>학생의 주문과 주점 운영을 지원</p></div></div>
+</div>
+<dl class="cover-statistics" aria-label="ReadyVery의 구현 범위와 주요 수치"><div class="cover-stat"><dt>축제 결제액 · 팀 성과</dt><dd>약 1,200<span>만 원</span></dd><dd class="cover-stat-detail">서비스를 거친 주문·결제</dd></div><div class="cover-stat"><dt>협업 주점 · 팀 운영</dt><dd>약 10<span>개</span></dd><dd class="cover-stat-detail">교내 축제 주점과 협업</dd></div><div class="cover-stat"><dt>축제 운영 기간</dt><dd>2<span>일</span></dd><dd class="cover-stat-detail">카페 주문 흐름을 축제로 확장</dd></div></dl><p class="cover-stat-note">축제 수치는 팀 서비스 운영 성과 · 개인 경험 기록 기준</p>
+<footer class="page-footer"><span class="evidence">한채연 · WEB DEVELOPER</span><span class="page-number">15 <i>/</i> 24</span></footer>
+</section><section class="page case accent-blue project-page theme-readyvery" id="page-16" data-title="ReadyVery · 쿠폰 적용 뒤의 결제 금액을 위젯에도 동일하게 반영했습니다" aria-labelledby="title-16">
+    <header class="page-header"><span class="project-context"><span class="project-name">ReadyVery</span><span class="eyebrow">PAYMENT BUG</span></span><span class="owner">한채연 · PORTFOLIO</span></header>
+    <div class="page-heading"><h2 id="title-16">쿠폰 적용 뒤의 결제 금액을<br> 위젯에도 동일하게 반영했습니다</h2><p class="subtitle">사용자에게 보이는 금액과 결제 요청 금액의 일치</p></div>
+    <div class="page-body"><div class="body-left"><div class="text-block"><h3>문제</h3><ul class="bullets"><li>주문 가격·할인 상태가 바뀌면 결제 위젯 금액도 갱신 필요</li><li>초기 금액과 변경 금액에 서로 다른 계산이 적용될 위험</li></ul></div><div class="text-block"><h3>수정</h3><ul class="bullets"><li>초기 렌더링과 updateAmount에 같은 할인 계산 적용</li><li>price와 salePrice를 useEffect 의존성에 반영</li></ul></div><div class="text-block"><h3>핵심 관점</h3><ul class="bullets"><li>화면 표시와 외부 결제 위젯의 상태를 함께 확인</li></ul></div></div><div class="body-right"><div class="code-diagram"><div class="code-label">PAYMENT AMOUNT</div><pre><code>const amount = price - salePrice;
+
+// 위젯 초기 금액에도 동일 계산 적용
+useEffect(() =&gt; {
+  paymentMethods.updateAmount(amount);
+}, [price, salePrice]);</code></pre><p class="diagram-caption">실제 변경 내용을 설명하기 위한 축약 코드</p></div></div></div>
+    <footer class="page-footer"><span class="evidence">한채연 · WEB DEVELOPER</span><span class="page-number">16 <i>/</i> 24</span></footer>
+    </section><section class="page case accent-blue project-page theme-readyvery" id="page-17" data-title="ReadyVery · 카페 주문 흐름을 교내 축제의 주문 환경으로 확장했습니다" aria-labelledby="title-17">
+    <header class="page-header"><span class="project-context"><span class="project-name">ReadyVery</span><span class="eyebrow">SERVICE OPERATIONS</span></span><span class="owner">한채연 · PORTFOLIO</span></header>
+    <div class="page-heading"><h2 id="title-17">카페 주문 흐름을<br> 교내 축제의 주문 환경으로 확장했습니다</h2><p class="subtitle">사용 환경 변화에 맞춘 기능 개발과 팀 서비스 운영</p></div>
+    <div class="page-body"><div class="body-left"><div class="text-block"><h3>상황과 기여</h3><ul class="bullets"><li>축제기획단 제휴로 교내 주점 주문·결제에 서비스 활용</li><li>축제 부스 탐색·검색 등 관련 프론트엔드 기능 구현</li><li>학생·운영진의 사용 피드백을 팀과 공유</li></ul></div><div class="text-block"><h3>배운 점</h3><ul class="bullets"><li>새 사용 환경에서는 주문 맥락·이동 흐름도 함께 확인</li><li>자신의 화면 외에 운영·기획의 제약을 이해하며 협업</li></ul></div></div><div class="body-right"><div class="service-metric"><span>팀 서비스 운영 성과</span><strong>10<span>개 주점</span></strong><div class="rule"></div><strong>약 1,200<span>만 원</span></strong><p>축제 이틀 동안 서비스를 거친 결제액<br>팀 서비스 운영 수치 · 개인 경험 기록 기준</p></div></div></div>
+    <footer class="page-footer"><span class="evidence">한채연 · WEB DEVELOPER</span><span class="page-number">17 <i>/</i> 24</span></footer>
+    </section><section class="page project-page project-cover theme-prolog" id="page-18" data-title="Prolog · 프로젝트 개요" aria-labelledby="title-18">
+<header class="page-header"><span class="chapter-label">PROJECT 04<span>팀 프로젝트 · 풀스택</span></span><span class="owner">한채연 · PORTFOLIO</span></header>
+<div class="page-body cover-body">
+  <div class="cover-identity"><div class="page-heading"><h2 id="title-18">Prolog</h2><p class="cover-description">기술 글과 지식을 공유하는<br>개발자 블로그 서비스</p></div>
+    <dl class="cover-meta"><div><dt>기간</dt><dd>2025.05–06</dd></div><div><dt>담당 역할</dt><dd>풀스택 개발</dd></div><div><dt>기술</dt><dd>Next.js · TypeScript · Prisma</dd></div></dl>
+    <a class="chapter-continue" href="#page-19">권한 설계·성장 사례 · 19–20 <span aria-hidden="true">→</span></a>
+  </div>
+  <div class="cover-summary"><h3>주요 기여</h3><ul class="cover-work"><li>게시글 상세를 실제 DB 조회와 서버 렌더링으로 연결</li><li>댓글 CRUD·개수 표시·북마크 API와 UI 구현</li><li>유스케이스·저장소 분리와 작성자 권한 검증</li></ul><div class="cover-result"><h3>핵심 결과</h3><p>게시글 삭제 시 현재 사용자와 작성자를 대조해 <br>유스케이스에서 데이터 소유권을 검증</p></div></div>
+</div>
+<dl class="cover-statistics" aria-label="Prolog의 구현 범위와 주요 수치"><div class="cover-stat"><dt>담당 기능 영역</dt><dd>3<span>개</span></dd><dd class="cover-stat-detail">게시글 상세 · 댓글 · 북마크</dd></div><div class="cover-stat"><dt>댓글 처리</dt><dd>4<span>가지</span></dd><dd class="cover-stat-detail">생성 · 조회 · 수정 · 삭제</dd></div><div class="cover-stat"><dt>게시글 상세 렌더링</dt><dd>SSR</dd><dd class="cover-stat-detail">Next.js 서버 렌더링 활용</dd></div></dl><p class="cover-stat-note">개인 담당 기능과 구현 방식</p>
+<footer class="page-footer"><span class="evidence">한채연 · WEB DEVELOPER</span><span class="page-number">18 <i>/</i> 24</span></footer>
+</section><section class="page case accent-blue project-page theme-prolog" id="page-19" data-title="Prolog · 게시글 삭제 권한을 유스케이스에서 검증했습니다" aria-labelledby="title-19">
+    <header class="page-header"><span class="project-context"><span class="project-name">Prolog</span><span class="eyebrow">AUTHORIZATION</span></span><span class="owner">한채연 · PORTFOLIO</span></header>
+    <div class="page-heading"><h2 id="title-19">게시글 삭제 권한을<br> 유스케이스에서 검증했습니다</h2><p class="subtitle">사용자 인터페이스의 표시 조건과 서버의 권한 규칙 분리</p></div>
+    <div class="page-body"><div class="body-left"><div class="text-block"><h3>판단</h3><ul class="bullets"><li>삭제 버튼을 숨기는 것만으로 요청을 제한할 수 없음</li><li>다른 진입 경로에서도 작성자 검증이 적용되어야 함</li></ul></div><div class="text-block"><h3>구현</h3><ul class="bullets"><li>유스케이스에서 게시글과 현재 사용자 확인</li><li>currentUserId와 post.userId 비교 후 삭제 수행</li></ul></div><div class="text-block"><h3>결과</h3><ul class="bullets"><li>화면 표시와 무관하게 서버 처리의 소유권 규칙 적용</li></ul></div></div><div class="body-right"><div class="flow "><div class="flow-step"><span class="step-no">01</span><div><strong>삭제 요청</strong><small>현재 사용자 식별</small></div></div><div class="flow-step"><span class="step-no">02</span><div><strong>게시글 소유권 검증</strong><small>현재 사용자 ID = 작성자 ID</small></div></div><div class="flow-step"><span class="step-no">03</span><div><strong>조건 충족 시 삭제</strong><small>검증 실패는 삭제를 수행하지 않음</small></div></div><p class="diagram-caption">권한 규칙의 위치를 실행 경로보다 안쪽에 배치</p></div></div></div>
+    <footer class="page-footer"><span class="evidence">한채연 · WEB DEVELOPER</span><span class="page-number">19 <i>/</i> 24</span></footer>
+    </section><section class="page case accent-blue project-page theme-prolog growth-page" id="page-20" data-title="Prolog · 같은 삭제 기능, 달라진 검증 기준" aria-labelledby="title-20">
+<header class="page-header"><span class="project-context"><span class="project-name">MoCha → Prolog</span><span class="eyebrow">BEFORE &amp; AFTER</span></span><span class="owner">한채연 · PORTFOLIO</span></header>
+<div class="page-heading"><h2 id="title-20">같은 삭제 기능, 달라진 검증 기준</h2><p class="subtitle">MoCha → Prolog · 로그인 확인에서 데이터 소유권 검증까지</p></div>
+<div class="page-body"><div class="growth-comparison">
+<div class="growth-column before"><span class="growth-label">BEFORE · MoCha · 2025.04</span><h3>사용자 식별에서 멈춘 검증</h3><ul class="bullets"><li>토큰을 검증해 사용자 ID 추출</li><li>삭제 유스케이스에는 대상 ID만 전달</li><li>유스케이스에 작성자 대조 과정이 없음</li></ul><pre class="growth-code"><code>const { user } = verifyAccessToken(token);
+
+await usecase.execute(transactionId);</code></pre></div>
+<div class="growth-arrow" aria-hidden="true">→</div>
+<div class="growth-column after"><span class="growth-label">AFTER · Prolog · 2025.06</span><h3>유스케이스에서 작성자까지 확인</h3><ul class="bullets"><li>현재 사용자 ID를 유스케이스로 전달</li><li>게시글을 조회해 작성자 ID와 대조</li><li>불일치하면 예외 처리 후 삭제 중단</li></ul><pre class="growth-code"><code>if (post.userId !== currentUserId) {
+  throw new Error('권한이 없습니다.');
+}
+await repository.deletePost(postId);</code></pre></div>
+</div><div class="growth-principle"><h3>이후의 개발 기준</h3><p>로그인 여부와 데이터 소유권을 구분하고, 핵심 권한 규칙은 유스케이스에서 검증</p><p class="diagram-caption">각 프로젝트의 실제 구현을 비교 · 코드는 핵심 처리만 축약</p></div></div>
+<footer class="page-footer"><span class="evidence">한채연 · WEB DEVELOPER</span><span class="page-number">20 <i>/</i> 24</span></footer></section><section class="page project-page project-cover theme-coedu" id="page-21" data-title="Coedu · 프로젝트 개요" aria-labelledby="title-21">
+<header class="page-header"><span class="chapter-label">PROJECT 05<span>팀 프로젝트 · 프론트엔드</span></span><span class="owner">한채연 · PORTFOLIO</span></header>
+<div class="page-body cover-body">
+  <div class="cover-identity"><div class="page-heading"><h2 id="title-21">Coedu</h2><p class="cover-description">교육 과정의 소통과 학습을 연결하는<br>실시간 교육 플랫폼</p></div>
+    <dl class="cover-meta"><div><dt>기간</dt><dd>2025.01–03</dd></div><div><dt>담당 역할</dt><dd>프론트엔드 개발</dd></div><div><dt>기술</dt><dd>TypeScript · Emotion · TanStack Query · GitHub Actions</dd></div></dl>
+    <a class="chapter-continue" href="#page-22">API·화면 연결 문제 해결 · 22 <span aria-hidden="true">→</span></a>
+  </div>
+  <div class="cover-summary"><h3>주요 기여</h3><ul class="cover-work"><li>Vite·TypeScript 초기 설정과 CI·개발 규칙 자동화</li><li>공통 HTTP·토큰 갱신·Kakao 로그인 구현</li><li>Emotion 테마 기반 구성·응답과 라우트 인자 대조</li></ul><div class="cover-result"><h3>핵심 결과</h3><p>팀의 공통 개발 기반을 마련하고, <br>발표 전 게시판 화면 이동 오류를 해결</p></div></div>
+</div>
+<dl class="cover-statistics" aria-label="Coedu의 구현 범위와 주요 수치"><div class="cover-stat"><dt>개발 규칙 자동화</dt><dd>CI</dd><dd class="cover-stat-detail">린트 · 포맷 · 커밋 훅</dd></div><div class="cover-stat"><dt>소셜 인증</dt><dd>OAuth</dd><dd class="cover-stat-detail">Kakao 로그인 · 토큰 갱신</dd></div><div class="cover-stat"><dt>공통 UI 기반</dt><dd>Theme</dd><dd class="cover-stat-detail">Emotion · ThemeProvider</dd></div></dl><p class="cover-stat-note">개인 담당 공통 기반과 구현 결과</p>
+<footer class="page-footer"><span class="evidence">한채연 · WEB DEVELOPER</span><span class="page-number">21 <i>/</i> 24</span></footer>
+</section><section class="page case accent-blue project-page theme-coedu" id="page-22" data-title="Coedu · 발표 전의 화면 이동 오류를 API 계약과 라우트 비교로 해결했습니다" aria-labelledby="title-22">
+    <header class="page-header"><span class="project-context"><span class="project-name">Coedu</span><span class="eyebrow">INTEGRATION BUG</span></span><span class="owner">한채연 · PORTFOLIO</span></header>
+    <div class="page-heading"><h2 id="title-22">발표 전의 화면 이동 오류를<br> API 계약과 라우트 비교로 해결했습니다</h2><p class="subtitle">자신의 담당 영역을 넘어 서비스 흐름 확인</p></div>
+    <div class="page-body"><div class="body-left"><div class="text-block"><h3>상황과 원인</h3><ul class="bullets"><li>발표 직전 사이드바 이동에서 화면 연결 오류 확인</li><li>API 응답 필드와 경로 구성에 쓰인 파라미터 불일치</li></ul></div><div class="text-block"><h3>대응</h3><ul class="bullets"><li>API 명세·응답 구조·이동 경로를 함께 비교</li><li>잘못 사용한 게시판 파라미터를 수정해 경로 연결</li></ul></div><div class="text-block"><h3>이후 기준</h3><ul class="bullets"><li>통합 시점 전에 응답 필드와 화면 이동 계약 확인</li><li>담당 구분보다 실제 사용자 흐름을 우선 점검</li></ul></div></div><div class="body-right"><div class="contract-diagram"><div><span>API RESPONSE</span><strong>응답 필드 확인</strong></div><div><span>ROUTE PARAMETER</span><strong>경로 인자 대조</strong></div><div class="resolved"><span>USER FLOW</span><strong>올바른 게시판으로 이동</strong></div></div></div></div>
+    <footer class="page-footer"><span class="evidence">한채연 · WEB DEVELOPER</span><span class="page-number">22 <i>/</i> 24</span></footer>
+    </section><section class="page case accent-blue" id="page-23" data-title="팀의 진행 상황이 보이도록 학습·리뷰의 흐름을 정리했습니다" aria-labelledby="title-23">
+    <header class="page-header"><span class="eyebrow">COLLABORATION</span><span class="owner">한채연 · PORTFOLIO</span></header>
+    <div class="page-heading"><h2 id="title-23">팀의 진행 상황이 보이도록<br> 학습·리뷰의 흐름을 정리했습니다</h2><p class="subtitle">UMC 학교 대표·파트장 경험 · 2022–2024</p></div>
+    <div class="page-body"><div class="body-left"><div class="text-block"><h3>경험에서 배운 점</h3><ul class="bullets"><li>초기 프로젝트에서 파트별 진행 공유 부족으로 일정 문제 경험</li><li>자신의 작업뿐 아니라 팀 전체의 연결 상태를 확인할 필요 인식</li></ul></div><div class="text-block"><h3>다음 활동에서 실천</h3><ul class="bullets"><li>학교 GitHub 조직·저장소로 주차별 과제와 진행 상태 공유</li><li>GitHub 사용 가이드와 파트장 코드 리뷰 운영</li><li>질문과 피드백을 주고받을 수 있는 학습 과정 지원</li></ul></div></div><div class="body-right"><div class="principle"><span>TEAM PRACTICE</span><strong>진행을 공유하고,<br>막힌 지점을<br>함께 확인하기</strong><div class="rule"></div><p>가이드 → 과제 공유 → 리뷰 → 질문</p></div></div></div>
+    <footer class="page-footer"><span class="evidence">한채연 · WEB DEVELOPER</span><span class="page-number">23 <i>/</i> 24</span></footer>
+    </section><section class="page case accent-blue background-page" id="page-24" data-title="이력 · 활동" aria-labelledby="title-24">
+<header class="page-header"><span class="eyebrow">BACKGROUND / TIMELINE</span><span class="owner">한채연 · PORTFOLIO</span></header>
+<div class="page-heading"><h2 id="title-24">이력 · 활동</h2><p class="subtitle">교육·경력·커뮤니티의 경험을 웹 개발 역량으로 연결</p></div>
+<div class="page-body"><div class="background-timelines"><ol class="background-timeline primary" aria-label="최근 교육과 경력"><li><span class="background-date">2026.09.11</span><div class="background-entry"><div class="background-name"><strong>정보처리기사</strong><span class="background-tag">자격증</span></div><p>국가기술자격 취득</p></div></li><li><span class="background-date">2026.06</span><div class="background-entry"><div class="background-name"><strong>SQLD · ADsP</strong><span class="background-tag">자격증</span></div><p>SQL 개발자 · 데이터분석 준전문가 취득</p></div></li><li><span class="background-date">2026.05–11</span><div class="background-entry"><div class="background-name"><strong>청년취업사관학교 SeSAC</strong><span class="background-tag">교육 · 수강 중</span></div><p>AWS와 AI를 활용한 MSA 기반 웹 서비스 개발</p></div></li><li><span class="background-date">2025.10–2026.04</span><div class="background-entry"><div class="background-name"><strong>알리고에이아이</strong><span class="background-tag">경력</span></div><p>개발팀 웹 개발자 · Celevu V2 리뉴얼</p></div></li><li><span class="background-date">2025.06–09</span><div class="background-entry"><div class="background-name"><strong>청년취업사관학교 SeSAC</strong><span class="background-tag">교육 · 수료</span></div><p>AI 시대의 자바 백엔드 개발자 양성 과정</p></div></li><li><span class="background-date">2025.03–06</span><div class="background-entry"><div class="background-name"><strong>KDT 멋쟁이사자처럼</strong><span class="background-tag">교육</span></div><p>프론트엔드 부트캠프 플러스 4기</p></div></li><li><span class="background-date">2025.02–03</span><div class="background-entry"><div class="background-name"><strong>KDC 항해99</strong><span class="background-tag">교육</span></div><p>실무에 바로 쓰는 Next.js</p></div></li></ol><ol class="background-timeline secondary" aria-label="동아리와 창업 및 수상"><li><span class="background-date">2024.10–11</span><div class="background-entry"><div class="background-name"><strong>구름(goorm)</strong><span class="background-tag">개발 검수</span></div><p>HTML5 콘텐츠 window.postMessage API 개발 검수</p></div></li><li><span class="background-date">2024.07–2025.02</span><div class="background-entry"><div class="background-name"><strong>구름톤 유니브</strong><span class="background-tag">운영</span></div><p>가톨릭대학교 3기 교내 운영진</p></div></li><li><span class="background-date">2023.10–2024.06</span><div class="background-entry"><div class="background-name"><strong>창업팀 ReadyVery</strong><span class="background-tag">창업</span></div><p>고객용·점주용 웹 개발 · 주문·결제 화면 구현</p></div></li><li><span class="background-date">2023.10</span><div class="background-entry"><div class="background-name"><strong>ACM-ICPC 가톨릭대 예선</strong><span class="background-tag">수상</span></div><p>은상</p></div></li><li><span class="background-date">2023.06–08</span><div class="background-entry"><div class="background-name"><strong>창업동아리 MATCH</strong><span class="background-tag">동아리</span></div><p>홈페이지 MVP 제작</p></div></li><li><span class="background-date">2022.08–2024.08</span><div class="background-entry"><div class="background-name"><strong>UMC 3–6기</strong><span class="background-tag">동아리</span></div><p>Android·Node.js 파트장 · 6기 학교 대표</p></div></li><li><span class="background-date">2021–2022.08</span><div class="background-entry"><div class="background-name"><strong>알고리즘 소모임 ALCUK</strong><span class="background-tag">소모임</span></div><p>주니어 · 시니어 · 시니어 심화</p></div></li></ol></div></div>
+<footer class="page-footer"><span class="evidence">한채연 · WEB DEVELOPER</span><span class="page-number">24 <i>/</i> 24</span></footer></section></main><div id="page-status" class="sr-only" aria-live="polite"></div></body></html>
