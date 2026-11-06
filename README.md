@@ -8,6 +8,7 @@
 
 - Celevu · YouthPick · ReadyVery · Prolog · Coedu
 - 프로젝트별 개요, 핵심 기여, 문제 해결 경험
+- AI 개발 도구 활용 경험: Cursor · Claude Code · figma make · readdy.ai, 생성 코드를 다루는 방식
 - 협업 경험과 교육·활동 이력
 - 메인 화면과 프로젝트별 상세 화면, 상세 목차, 이력 필터
 - 기존 24페이지 포트폴리오의 내용과 14개 상세 사례를 유지
@@ -39,7 +40,7 @@ Google Analytics에서 속성과 웹 데이터 스트림을 만들고 사이트 
 - `page_view`: 최초 방문 및 메인·프로젝트 상세 화면 전환
 - `project_view`: 프로젝트 상세 진입
 - `case_view`: 실제 화면에 노출된 상세 사례
-- `section_view`: 소개·프로젝트·협업·이력 섹션 조회
+- `section_view`: 소개·프로젝트·AI 활용·협업·이력 섹션 조회
 - `contact_click`: 이메일·GitHub 링크 클릭
 
 메인 내부의 목차 이동, 같은 프로젝트 내 이동, 글꼴 로딩에 따른 재표시는
